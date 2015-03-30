@@ -1,8 +1,8 @@
-# Ractive.js ractive-codemirror component plugin
+# Codemirror plugin for Ractive.js
 
 *Find more Ractive.js plugins at [docs.ractivejs.org/latest/plugins](http://docs.ractivejs.org/latest/plugins)*
 
-[See the demo here.](index.html)
+[See the demo here.](http://dagnelies.github.io/ractive-codemirror/)
 
 ## Usage
 
@@ -17,7 +17,7 @@ Include this file on your page below Ractive, e.g:
 <script src='https://cdn.ractivejs.org/edge/ractive.js'></script>
 
 <!-- this plugin -->
-<script src='https://rawgit.com/dagnelies/ractive-codemirror/src/ractive-codemirror.js'></script>
+<script src='https://cdn.rawgit.com/dagnelies/ractive-codemirror/master/src/ractive-codemirror.js'></script>
 ```
 
 
