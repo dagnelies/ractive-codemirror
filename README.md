@@ -2,26 +2,23 @@
 
 *Find more Ractive.js plugins at [docs.ractivejs.org/latest/plugins](http://docs.ractivejs.org/latest/plugins)*
 
-[See the demo here.](TODO)
+[See the demo here.](index.html)
 
 ## Usage
 
 Include this file on your page below Ractive, e.g:
 
 ```html
-<script src='lib/ractive.js'></script>
-<script src='lib/ractive-components-ractive-codemirror.js'></script>
+<!-- Codemirror -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/codemirror.css' />
+<script src='https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.1.0/codemirror.js'></script>
+
+<!-- Ractive -->
+<script src='https://cdn.ractivejs.org/edge/ractive.js'></script>
+
+<!-- this plugin -->
+<script src='https://rawgit.com/dagnelies/ractive-codemirror/src/ractive-codemirror.js'></script>
 ```
-
-Or, if you're using a module loader, require this module:
-
-```js
-// requiring the plugin will 'activate' it - no need to use the return value
-require( 'ractive-components-ractive-codemirror' );
-```
-
-**plugin-specific instructions to go here...**
-
 
 
 ## License
