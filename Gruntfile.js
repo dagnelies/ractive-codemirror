@@ -1,36 +1,34 @@
-/* The one-size-fits-all key to Grunt.js happiness - http://bit.ly/grunt-happy */
+module.exports = function(grunt) {
+	
+	grunt.initConfig({
+		pkg: grunt.file.readJSON('package.json'),
+		jshint: {
+			files: 'src/**/*.js',
+			options: {
+				asi: true,
+				sub: true
+			}
+		},
+		concat: {
+			build: {
+				src: 'src/**/*.js',
+				dest: 'bin/<%= pkg.name %>.js'
+			}
+		},
+		uglify: {
+			options: {
+				banner: '/*! <%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+			},
+			build: {
+				src: 'bin/<%= pkg.name %>.js',
+				dest: 'bin/<%= pkg.name %>.min.js'
+			}
+		}
+	});
 
-/*global module:false*/
-module.exports = function ( grunt ) {
+	grunt.loadNpmTasks('grunt-contrib-concat');
+	grunt.loadNpmTasks('grunt-contrib-jshint');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    'use strict';
-
-    var config, dependency;
-
-    require( 'jit-grunt' )( grunt );
-
-    config = {
-        pkg: grunt.file.readJSON( 'package.json' )
-    };
-
-    // Read config files from the `grunt/config/` folder
-    grunt.file.expand( 'grunt/config/*.js' ).forEach( function ( path ) {
-        var property = /grunt\/config\/(.+)\.js/.exec( path )[1],
-            module = require( './' + path );
-        config[ property ] = typeof module === 'function' ? module( grunt ) : module;
-    });
-
-    // Initialise grunt
-    grunt.initConfig( config );
-
-    // Load development dependencies specified in package.json
-    for ( dependency in config.pkg.devDependencies ) {
-        if ( /^grunt-/.test( dependency) ) {
-            grunt.loadNpmTasks( dependency );
-        }
-    }
-
-    // Load tasks from the `grunt-tasks/` folder
-    grunt.loadTasks( 'grunt/tasks' );
-
+	grunt.registerTask('default', ['jshint', 'concat', 'uglify']);
 };
