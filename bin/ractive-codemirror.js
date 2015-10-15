@@ -1,16 +1,3 @@
-/*
-
-	ractive-components-ractive-codemirror
-	=====================================
-
-	Version 1.0.
-	A simple codemirror widget for ractive.
-	
-	Dependencies:
-	- RactiveJS
-	- Codemirror
-*/
-
 (function ( global, factory ) {
 
 	'use strict';
@@ -41,22 +28,17 @@
 	Ractive.components['codemirror'] = Ractive.extend({
 		template: "<textarea></textarea>",
 		isolated: true,
+		data: {
+			mode: "html",
+			lineNumbers: true
+		},
 		onrender: function () {
 			var self = this
 			var textarea = this.find('textarea')
-			
-			var mode = this.get('mode') || 'htmlmixed'
-			if( mode === 'html' )
-				mode = 'htmlmixed'
-			if ( mode === 'json' )
-				mode = { name: 'javascript', json: true }
+			var editor = CodeMirror.fromTextArea( textarea )
 			
 			var updating = false
 			
-			var editor = CodeMirror.fromTextArea( textarea, {
-				mode: mode,
-				lineNumbers: true
-			})
 			editor.on('change', function() {
 				if( updating )
 					return
@@ -64,25 +46,29 @@
 				self.set('value', editor.getValue())
 				updating = false
 			})
-			this.observe('value', function(val) {
-				if( updating )
+			
+			this.observe('*', function(val, oldVal, kp) {
+				if( kp === 'value' ) {
+					if( updating )
+						return
+					updating = true
+					editor.setValue( val )
+					updating = false
 					return
-				updating = true
-				editor.setValue( val )
-				updating = false
+				}
+				if( kp === 'mode' ) {
+					if( val === 'html' )
+						val = 'htmlmixed'
+					if( val === 'json' )
+						val = { name: 'javascript', json: true }
+				}
+				editor.setOption(kp, val)
 			})
-			this.observe('mode', function( mode ) {
-				if( mode === 'html' )
-					mode = 'htmlmixed'
-				if ( mode === 'json' )
-					mode = { name: 'javascript', json: true }
-				editor.setOption("mode", mode )
-			})
+			
 			this.on( 'teardown', function () {
 				editor.toTextArea();
 			});
 		}
-		
 	})
 
 
