@@ -3,7 +3,8 @@ body {
 	color: #353535;
 	line-height: 1.5;
 	padding: 2em 1em 2em 1em;
-	font-family: 'Baskerville', 'Book Antiqua', 'Georgia';
+	/* font-family: 'Baskerville', 'Book Antiqua', 'Georgia'; */
+	font-family: "Source Sans Pro","Arial",sans-serif;
 	width: 100%;
 	min-width: 32em;
 	max-width: 48em;
