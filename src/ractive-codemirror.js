@@ -52,7 +52,7 @@
 					if( updating )
 						return
 					updating = true
-					editor.setValue( val )
+					editor.setValue( val ||'')
 					updating = false
 					return
 				}
