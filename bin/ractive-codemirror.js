@@ -10,6 +10,8 @@ Ractive.components['codemirror'] = Ractive.extend({
 		var textarea = this.find('textarea')
 		var editor = CodeMirror.fromTextArea( textarea )
 		
+		this.editor = editor; // for the onteardown function
+		
 		var updating = false
 		
 		editor.on('change', function() {
@@ -21,8 +23,7 @@ Ractive.components['codemirror'] = Ractive.extend({
 		})
 		
 		this.observe('*', function(val, old, kp) {
-			console.log(kp + ': ' + old + ' -> ' + val)
-				
+			
 			if( kp === 'value' ) {
 				if( updating )
 					return
@@ -47,6 +48,6 @@ Ractive.components['codemirror'] = Ractive.extend({
 		})
 	},
 	onteardown: function () {
-		editor.toTextArea()
+		this.editor.toTextArea()
 	}
 })
